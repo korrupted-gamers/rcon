@@ -37,6 +37,8 @@ issues with this, you can try deleting your node_modules folder and then running
 
 Environment vars must be set for RCON to successfully connect with your Squad server. Here's an example .env file.
 
+```
 RCON_HOST=192.168.10.200
 RCON_PORT=21114
 RCON_PASSWORD=rosebud123
+```
