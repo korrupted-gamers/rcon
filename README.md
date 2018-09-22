@@ -31,3 +31,12 @@ To start the bot just run
 If you update the bot, please run `npm update` before starting it again. If you have
 issues with this, you can try deleting your node_modules folder and then running
 `npm install` again.
+
+
+## .env file
+
+Environment vars must be set for RCON to successfully connect with your Squad server. Here's an example .env file.
+
+RCON_HOST=192.168.10.200
+RCON_PORT=21114
+RCON_PASSWORD=rosebud123
