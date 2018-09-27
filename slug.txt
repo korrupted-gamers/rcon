@@ -1,0 +1,5 @@
+----- Active Players -----
+ID: 0 | SteamID: 76561197996838808 | Name: [KG]Crispy
+ID: 5 | SteamID: 76561197997003310 | Name: Fuzzy Merkin_[Lo1KC]
+ID: 3 | SteamID: 76561198166797349 | Name: [HTC]Holotic
+ID: 1 | SteamID: 76561198255489514 | Name: черствый
