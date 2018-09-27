@@ -2,6 +2,8 @@ require('dotenv').config()
 const Rcon = require('rcon');
 const handler = require('./handler');
 
+// pull the admins file when the program starts
+handler.fileops.pullAdminsFile();
 
 
 
@@ -35,19 +37,18 @@ rcon.on('auth', () => {
         // channel.send(str)
         //     .then(message => console.log(message.content))
         //     .catch(console.error);
-		
+
 		if (str.indexOf('----- Active Players -----') !== -1) {
 			console.log('activ players found in response');
-			
+
 			const usersRegex = /ID: (\d+) \| SteamID: (.+) \| Name: (.+)\n/g;
-			
-			const name = str.match(usersRegex)[0];
-			
-			console.log(name)
+
+
 			var match = usersRegex.exec(str);
-			while (match != null) {
+			while (match !== null) {
+				console.log(match)
 				console.log(`MATCHO:::::: ${match[1]}, ${match[2]}, ${match[3]}`)
-				
+
 				handler.fileops.addSpawner({
 					message: {
 						name: match[3],
@@ -55,14 +56,19 @@ rcon.on('auth', () => {
 					},
 					rcon
 				});
-				
+
+				handler.commands.AdminBroadcast({
+					message: `Welcome ${name}! Next round you will have access to AdminCreateVehicle!`,
+					rcon
+				})
+
 				match = usersRegex.exec(str);
 
 			}
-			
+
 
 		}
-		
+
     }
 }).on('end', () => {
     rcon.connect();
@@ -70,4 +76,3 @@ rcon.on('auth', () => {
 });
 
 rcon.connect();
-
