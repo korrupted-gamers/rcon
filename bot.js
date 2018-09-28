@@ -7,7 +7,7 @@ const handler = require('./handler');
 
 
 // generate SSH keys if they don't already exist
-if (handler.fileops.isSSHKeyPresent) {
+if (!handler.fileops.isSSHKeyPresent) {
   console.log(' ****************************************************************')
   console.log(' ***** Please add a SSH keypair to ./data/ssh then restart! *****')
   console.log(' ****************************************************************')
