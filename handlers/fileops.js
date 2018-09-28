@@ -23,7 +23,7 @@ if (typeof sshIdentity === 'undefined') throw new Error('SSH_IDENTITY must be de
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
 
-const filePath = path.join(__dirname, 'Admins.cfg');
+const filePath = path.join(__dirname, '..', 'data', 'Admins.cfg');
 
 
 
