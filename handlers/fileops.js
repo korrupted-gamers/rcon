@@ -3,13 +3,15 @@ const {
   exec
 } = require('child_process');
 const path = require('path');
+const os = require('os');
 const Rsync = require('rsync');
+const sshpk = require('sshpk');
+
 const sshHost = process.env.SSH_HOST;
 const sshPort = process.env.SSH_PORT;
-const sshIdentity = process.env.SSH_IDENTITY;
 const sshUser = process.env.SSH_USER;
+const sshIdentity = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa.pub');
 const remoteFilePath = process.env.REMOTE_ADMINS_FILEPATH;
-
 
 
 
@@ -17,13 +19,15 @@ if (typeof sshUser === 'undefined') throw new Error('SSH_USER must be defined in
 if (typeof sshHost === 'undefined') throw new Error('SSH_HOST must be defined in env')
 if (typeof sshPort === 'undefined') throw new Error('SSH_PORT must be defined in env')
 if (typeof remoteFilePath === 'undefined') throw new Error('REMOTE_ADMINS_FILEPATH must be defined in env')
-if (typeof sshIdentity === 'undefined') throw new Error('SSH_IDENTITY must be defined in env')
 
 
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
 
 const filePath = path.join(__dirname, '..', 'data', 'Admins.cfg');
+
+
+// echo generated ssh key
 
 
 
@@ -96,7 +100,6 @@ module.exports = {
     rsync.execute((err, code, cmd) => {
       console.log(cmd)
       if (err) throw err;
-
     })
   }
 
