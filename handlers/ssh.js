@@ -16,7 +16,7 @@ module.exports = {
       comment: 'rconbot'
     };
 
-    console.log(`Generating SSH keys at ${path.join(os.homedir(), '.ssh')}...`)
+    console.log(`Generating SSH keys at ${privKeyPath}...`)
     keygen(opts, function(err, keypair) {
       if (err) throw err;
       console.log('===============================');
