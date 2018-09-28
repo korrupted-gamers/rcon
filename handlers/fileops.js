@@ -100,6 +100,10 @@ module.exports = {
       console.log(cmd)
       if (err) throw err;
     })
+  },
+
+  isSSHKeyPresent: () => {
+    return fs.fileExistsSync(sshIdentity)
   }
 
 };

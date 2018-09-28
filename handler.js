@@ -1,4 +1,3 @@
 module.exports = {
-	fileops: require('./handlers/fileops'),
-	ssh: require('./handlers/ssh'),
+	fileops: require('./handlers/fileops')
 };
