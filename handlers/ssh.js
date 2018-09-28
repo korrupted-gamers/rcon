@@ -1,7 +1,6 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const sshIdentity = process.env.SSH_IDENTITY;
 const keygen = require('ssh-keygen');
 const pubKeyPath = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa.pub');
 const privKeyPath = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa');
