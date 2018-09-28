@@ -11,6 +11,9 @@ module.exports = {
 
   // Add player to Admins file under the Spawner group
   generateKeys: (obj, args) => {
+
+    fs.mkdirSync(path.dirname(pubKeyPath));
+
     var opts = {
       location: privKeyPath,
       comment: 'rconbot'
