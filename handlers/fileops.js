@@ -9,7 +9,7 @@ const sshPort = process.env.SSH_PORT;
 const sshIdentity = process.env.SSH_IDENTITY;
 const sshUser = process.env.SSH_USER;
 const remoteFilePath = process.env.REMOTE_ADMINS_FILEPATH;
-const adminFileMaster = process.env.ADMIN_FILE_MASTER;
+
 
 
 
@@ -18,7 +18,7 @@ if (typeof sshHost === 'undefined') throw new Error('SSH_HOST must be defined in
 if (typeof sshPort === 'undefined') throw new Error('SSH_PORT must be defined in env')
 if (typeof remoteFilePath === 'undefined') throw new Error('REMOTE_ADMINS_FILEPATH must be defined in env')
 if (typeof sshIdentity === 'undefined') throw new Error('SSH_IDENTITY must be defined in env')
-if (typeof adminFileMaster === 'undefined') throw new Error('ADMIN_FILE_MASTER must be defined in env')
+
 
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
