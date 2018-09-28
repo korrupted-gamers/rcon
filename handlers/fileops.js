@@ -4,7 +4,6 @@ const {
 } = require('child_process');
 const path = require('path');
 const Rsync = require('rsync');
-const sshpk = require('sshpk');
 
 const sshHost = process.env.SSH_HOST;
 const sshPort = process.env.SSH_PORT;
