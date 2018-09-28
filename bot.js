@@ -1,5 +1,5 @@
 require('dotenv').config()
-const nedb = require('nedb');
+//const nedb = require('nedb'); // @todo ???
 const Rcon = require('rcon');
 const handler = require('./handler');
 
