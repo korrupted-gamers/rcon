@@ -8,7 +8,7 @@ const Rsync = require('rsync');
 const sshHost = process.env.SSH_HOST;
 const sshPort = process.env.SSH_PORT;
 const sshUser = process.env.SSH_USER;
-const sshIdentity = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa.pub');
+const sshIdentity = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa');
 const remoteFilePath = process.env.REMOTE_ADMINS_FILEPATH;
 
 
