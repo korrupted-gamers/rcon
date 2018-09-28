@@ -13,20 +13,26 @@ module.exports = {
   generateKeys: (obj, args) => {
 
     fs.mkdirSync(path.dirname(pubKeyPath));
-
-    var opts = {
-      location: privKeyPath,
-      comment: 'rconbot'
-    };
-
-    console.log(`Generating SSH keys at ${privKeyPath}...`)
-    keygen(opts, function(err, keypair) {
+    fs.chmod(path.dirname(pubKeyPath), 0600, (err) => {
       if (err) throw err;
-      console.log('===============================');
-      console.log('SSH keys have been generated. Add the public key to the Squad server so rconbot can connect to it.')
-      console.log(keypair.pubKey);
-      console.log('===============================');
-    });
+
+      var opts = {
+        location: privKeyPath,
+        comment: 'rconbot'
+      };
+
+      console.log(`Generating SSH keys at ${privKeyPath}...`)
+      keygen(opts, function(err, keypair) {
+        if (err) throw err;
+        console.log('===============================');
+        console.log('SSH keys have been generated. Add the public key to the Squad server so rconbot can connect to it.')
+        console.log(keypair.pubKey);
+        console.log('===============================');
+      });
+
+    })
+
+
 
   },
 
