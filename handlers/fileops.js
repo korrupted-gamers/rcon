@@ -94,6 +94,7 @@ module.exports = {
       .destination(`${filePath}`)
 
     rsync.execute((err, code, cmd) => {
+      console.log(cmd)
       if (err) throw err;
 
     })
