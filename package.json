@@ -1,19 +1,20 @@
 {
   "name": "rcon",
+  "private": "true",
   "version": "1.0.0",
   "description": "Squad RCON for Korruptedgamers website",
   "main": "bot.js",
   "scripts": {
+    "start": "node bot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
-    "name": "Christopher West",
-    "email": "9ninemind@gmail.io",
-    "url": "https://github.com/ninemind"
+    "name": "Chris Grimmett",
+    "email": "chris@grimtech.net",
+    "url": "https://github.com/korrupted-gamers"
   },
-  "license": "ISC",
+  "license": "Unlicense",
   "dependencies": {
-    "discord.js": "^11.2.1",
     "dotenv": "^6.0.0",
     "keypress": "^0.2.1",
     "rcon": "^1.0.3",
