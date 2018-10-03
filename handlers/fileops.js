@@ -3,7 +3,7 @@ const {
   exec
 } = require('child_process');
 const path = require('path');
-const Rsync = require('rsync');
+const rsync = require('rsyncwrapper')
 
 const sshHost = process.env.SSH_HOST;
 const sshPort = process.env.SSH_PORT;
@@ -81,27 +81,35 @@ module.exports = {
   },
 
   pushAdminsFile: (obj, args) => {
-    var rsync = new Rsync()
-      .shell(`ssh -p ${sshPort} -i ${sshIdentityFile}`)
-      .source(`${filePath}`)
-      .destination(`${sshUser}@${sshHost}:${remoteFilePath}`)
-
-    rsync.execute((err, code, cmd) => {
+    rsync(
+      {
+        src: filePath,
+        dest: `${sshUser}@${sshHost}:${remoteFilePath}`,
+        ssh: true,
+        recursive: false,
+        deleteAll: false,
+        privateKey: sshIdentityFile
+      }
+    , (err, code, cmd) => {
       if (err) throw err;
     })
   },
 
   pullAdminsFile: (obj, args) => {
     console.log('pulling file')
-    var rsync = new Rsync()
-      .shell(`ssh -p ${sshPort} -i ${sshIdentityFile}`)
-      .source(`${sshUser}@${sshHost}:${remoteFilePath}`)
-      .destination(`${filePath}`)
-
-    rsync.execute((err, code, cmd) => {
-      console.log(cmd)
-      if (err) throw err;
-    })
+    rsync(
+        {
+          dest: filePath,
+          src: `${sshUser}@${sshHost}:${remoteFilePath}`,
+          ssh: true,
+          recursive: false,
+          deleteAll: false,
+          privateKey: sshIdentityFile
+        }
+      , (err, code, cmd) => {
+        if (err) throw err;
+      }
+    )
   },
 
   isSSHKeyPresent: (cb) => {

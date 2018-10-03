@@ -19,7 +19,7 @@
     "keypress": "^0.2.1",
     "rcon": "^1.0.3",
     "request": "^2.83.0",
-    "rsync": "^0.6.1"
+    "rsyncwrapper": "^3.0.1"
   },
   "engines": {
     "node": "^8.12.0"
