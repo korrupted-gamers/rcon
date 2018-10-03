@@ -96,7 +96,7 @@ module.exports = {
   },
 
   pullAdminsFile: (obj, args) => {
-    console.log('pulling file')
+    console.log(`pulling file ${sshUser}@${sshHost}:${remoteFilePath} to ${filePath}`)
     rsync(
         {
           dest: filePath,
