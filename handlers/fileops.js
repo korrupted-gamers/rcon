@@ -92,6 +92,7 @@ module.exports = {
         args: ['--verbose']
       }
     , (err, code, cmd) => {
+      console.log(`err=${err}, code=${code}, cmd=${cmd}`)
       if (err) throw err;
     })
   },
