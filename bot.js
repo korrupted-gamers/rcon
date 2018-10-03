@@ -6,75 +6,73 @@ const handler = require('./handler');
 
 
 
-// generate SSH keys if they don't already exist
-if (!handler.fileops.isSSHKeyPresent) {
-  handler.fileops.writePubkey();
-  handler.fileops.writePrivkey();
-} else {
-  // pull the admins file when the program starts (skip if ssh was just created)
-  handler.fileops.pullAdminsFile();
+// generate SSH keys
+handler.fileops.writePubkey();
+handler.fileops.writePrivkey();
 
-  const rcon = new Rcon(
-    process.env.RCON_HOST,
-    process.env.RCON_PORT,
-    process.env.RCON_PASSWORD, {
-      "tcp": true,
-      "challenge": false
-    }
-  );
+// pull the admins file when the program starts (skip if ssh was just created)
+handler.fileops.pullAdminsFile();
 
-  let authenticated = false;
-  rcon.on('auth', () => {
-    if (!authenticated) {
-      authenticated = true;
-      console.log('Authenticated!');
-      const mainTimer = setInterval(() => {
-        var buffer = "ListPlayers";
-        rcon.send(buffer);
-        buffer = "";
-      }, 10000);
-    }
+const rcon = new Rcon(
+  process.env.RCON_HOST,
+  process.env.RCON_PORT,
+  process.env.RCON_PASSWORD, {
+    "tcp": true,
+    "challenge": false
+  }
+);
 
-  }).on('response', str => {
-    if (str) {
-      console.log(`>> response: ${str}`)
+let authenticated = false;
+rcon.on('auth', () => {
+  if (!authenticated) {
+    authenticated = true;
+    console.log('Authenticated!');
+    const mainTimer = setInterval(() => {
+      var buffer = "ListPlayers";
+      rcon.send(buffer);
+      buffer = "";
+    }, 10000);
+  }
 
-      if (str.indexOf('----- Active Players -----') !== -1) {
-        console.log('activ players found in response');
+}).on('response', str => {
+  if (str) {
+    console.log(`>> response: ${str}`)
 
-        const usersRegex = /ID: (\d+) \| SteamID: (.+) \| Name: (.+)\n/g;
+    if (str.indexOf('----- Active Players -----') !== -1) {
+      console.log('activ players found in response');
+
+      const usersRegex = /ID: (\d+) \| SteamID: (.+) \| Name: (.+)\n/g;
 
 
-        var match = usersRegex.exec(str);
-        while (match !== null) {
-          console.log(match)
-          console.log(`MATCHO:::::: ${match[1]}, ${match[2]}, ${match[3]}`)
+      var match = usersRegex.exec(str);
+      while (match !== null) {
+        console.log(match)
+        console.log(`MATCHO:::::: ${match[1]}, ${match[2]}, ${match[3]}`)
 
-          handler.fileops.addSpawner({
-            message: {
-              name: match[3],
-              steamID: match[2]
-            },
-            rcon
-          });
+        handler.fileops.addSpawner({
+          message: {
+            name: match[3],
+            steamID: match[2]
+          },
+          rcon
+        });
 
-          handler.commands.AdminBroadcast({
-            message: `Welcome ${name}! Next round you will have access to AdminCreateVehicle!`,
-            rcon
-          })
+        handler.commands.AdminBroadcast({
+          message: `Welcome ${name}! Next round you will have access to AdminCreateVehicle!`,
+          rcon
+        })
 
-          match = usersRegex.exec(str);
-
-        }
-
+        match = usersRegex.exec(str);
 
       }
 
-    }
-  }).on('end', () => {
-    rcon.connect();
-    console.log('endo')
-  });
 
+    }
+
+  }
+}).on('end', () => {
   rcon.connect();
-}
+  console.log('endo')
+});
+
+rcon.connect();

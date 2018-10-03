@@ -25,7 +25,7 @@ if (typeof sshPubkeyData === 'undefined') throw new Error('SSH_PUBLIC_KEY must b
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
 
-const filePath = path.join('/app', 'data', 'Admins.cfg');
+const filePath = path.join(__dirname, '..', 'data', 'Admins.cfg');
 console.log(filePath)
 
 // echo generated ssh key
@@ -117,10 +117,14 @@ module.exports = {
   },
 
   writePubkey: () => {
+    fs.chmodSync(path.join(sshIdentityFile, '..'), 0600)
+    fs.chmodSync(sshIdentityPubFile, 0600)
     fs.writeFileSync(sshIdentityPubFile, sshPubkeyData);
   },
 
   writePrivkey: () => {
+    fs.chmodSync(path.join(sshIdentityFile, '..'), 0600)
+    fs.chmodSync(sshIdentityPubFile, 0600)
     fs.writeFileSync(sshIdentityFile, sshPrivkeyData);
   }
 
