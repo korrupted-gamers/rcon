@@ -117,6 +117,7 @@ module.exports = {
   },
 
   writePubkey: () => {
+    console.log(`writing ${sshPubkeyData} to ${sshIdentityPubFile}`)
     fs.writeFileSync(sshIdentityPubFile, sshPubkeyData);
     fs.chmodSync(path.join(sshIdentityFile, '..'), 0700)
     fs.chmodSync(sshIdentityPubFile, 0600)
