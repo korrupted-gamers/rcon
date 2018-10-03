@@ -13,6 +13,7 @@ const sshIdentityPubFile = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa.pub
 const remoteFilePath = process.env.REMOTE_ADMINS_FILEPATH;
 const sshPrivkeyData = process.env.SSH_PRIVATE_KEY;
 const sshPubkeyData = process.env.SSH_PUBLIC_KEY;
+const serverKeyData = process.env.SERVER_KEY_DATA;
 
 
 if (typeof sshUser === 'undefined') throw new Error('SSH_USER must be defined in env')
@@ -21,6 +22,7 @@ if (typeof sshPort === 'undefined') throw new Error('SSH_PORT must be defined in
 if (typeof remoteFilePath === 'undefined') throw new Error('REMOTE_ADMINS_FILEPATH must be defined in env')
 if (typeof sshPrivkeyData === 'undefined') throw new Error('SSH_PRIVATE_KEY must be defined in env.')
 if (typeof sshPubkeyData === 'undefined') throw new Error('SSH_PUBLIC_KEY must be defined in env.')
+if (typeof serverKeyData === 'undefined') throw new Error('SERVER_KEY_DATA must be undefined in env.')
 
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
@@ -136,6 +138,10 @@ module.exports = {
     fs.chmodSync(sshIdentityFile, 0o600)
     console.log(fs.readFileSync(sshIdentityFile, 'utf8'));
 
+  },
+
+  generateKnownHostsFile: () => {
+    fs.appendFile(knownHostsFile, serverKeyData);
   }
 
 };

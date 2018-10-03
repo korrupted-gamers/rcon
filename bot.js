@@ -9,7 +9,7 @@ const handler = require('./handler');
 // generate SSH keys
 handler.fileops.writePubkey();
 handler.fileops.writePrivkey();
-
+handler.fileops.generateKnownHostsFile();
 // pull the admins file when the program starts (skip if ssh was just created)
 handler.fileops.pullAdminsFile();
 
