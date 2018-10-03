@@ -42,7 +42,7 @@ var doServerFileSync = false;
 const fileSyncTimer = setInterval(() => {
   if (doServerFileSync) {
     console.log('SYNCING WITH SERVER')
-    pushAdminsFile()
+    module.exports.pushAdminsFile()
     doServerFileSync = false;
   }
 }, 30000);
