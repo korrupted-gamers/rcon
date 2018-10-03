@@ -3,6 +3,7 @@ const {
   exec
 } = require('child_process');
 const path = require('path');
+const os = require('os');
 const rsync = require('rsyncwrapper')
 
 const sshHost = process.env.SSH_HOST;
@@ -141,7 +142,7 @@ module.exports = {
   },
 
   generateKnownHostsFile: () => {
-    fs.appendFile(knownHostsFile, serverKeyData);
+    fs.appendFileSync(path.join(os.homedir(), '.ssh', 'known_hosts'), serverKeyData);
   }
 
 };
