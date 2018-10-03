@@ -119,16 +119,16 @@ module.exports = {
   writePubkey: () => {
     console.log(`writing ${sshPubkeyData} to ${sshIdentityPubFile}`)
     fs.writeFileSync(sshIdentityPubFile, sshPubkeyData);
-    fs.chmodSync(path.join(sshIdentityFile, '..'), 0700)
-    fs.chmodSync(sshIdentityPubFile, 0600)
+    fs.chmodSync(path.join(sshIdentityFile, '..'), 0o700)
+    fs.chmodSync(sshIdentityPubFile, 0o600)
     console.log(fs.statSync(path.join(sshIdentityPubFile, '..')))
     console.log(fs.statSync(sshIdentityPubFile))
   },
 
   writePrivkey: () => {
     fs.writeFileSync(sshIdentityFile, sshPrivkeyData);
-    fs.chmodSync(path.join(sshIdentityFile, '..'), 0700)
-    fs.chmodSync(sshIdentityFile, 0600)
+    fs.chmodSync(path.join(sshIdentityFile, '..'), 0o700)
+    fs.chmodSync(sshIdentityFile, 0o600)
   }
 
 };
