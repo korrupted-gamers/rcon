@@ -4,6 +4,6 @@ module.exports = {
         let message = obj.message;
         if (typeof message === 'undefined') message = ''
 
-        obj.rcon.send('AdminBroadcast ' + nickname + ': ' + args);
+        obj.rcon.send('AdminBroadcast ' + message);
     }
 };

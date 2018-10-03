@@ -58,7 +58,7 @@ rcon.on('auth', () => {
         });
 
         handler.commands.AdminBroadcast({
-          message: `Welcome ${name}! Next round you will have access to AdminCreateVehicle!`,
+          message: `Welcome ${match[3]}! Next round you will have access to AdminCreateVehicle!`,
           rcon
         })
 
