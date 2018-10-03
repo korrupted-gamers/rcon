@@ -121,14 +121,14 @@ module.exports = {
     fs.writeFileSync(sshIdentityPubFile, sshPubkeyData);
     fs.chmodSync(path.join(sshIdentityFile, '..'), 0700)
     fs.chmodSync(sshIdentityPubFile, 0600)
-    console.log(fs.statSync(path.join(sshIdentityFile, '..')))
-    console.log(fs.statSync(sshIdentityFile))
+    console.log(fs.statSync(path.join(sshIdentityPubFile, '..')))
+    console.log(fs.statSync(sshIdentityPubFile))
   },
 
   writePrivkey: () => {
     fs.writeFileSync(sshIdentityFile, sshPrivkeyData);
     fs.chmodSync(path.join(sshIdentityFile, '..'), 0700)
-    fs.chmodSync(sshIdentityPubFile, 0600)
+    fs.chmodSync(sshIdentityFile, 0600)
   }
 
 };
