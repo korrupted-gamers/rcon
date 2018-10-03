@@ -88,7 +88,8 @@ module.exports = {
         ssh: true,
         recursive: false,
         deleteAll: false,
-        privateKey: sshIdentityFile
+        privateKey: sshIdentityFile,
+        args: ['--verbose']
       }
     , (err, code, cmd) => {
       if (err) throw err;
@@ -104,7 +105,8 @@ module.exports = {
           ssh: true,
           recursive: false,
           deleteAll: false,
-          privateKey: sshIdentityFile
+          privateKey: sshIdentityFile,
+          args: ['--verbose']
         }
       , (err, code, cmd) => {
         if (err) throw err;
