@@ -8,9 +8,8 @@ const handler = require('./handler');
 
 // generate SSH keys if they don't already exist
 if (!handler.fileops.isSSHKeyPresent) {
-  console.log(' ****************************************************************')
-  console.log(' ***** Please add a SSH keypair to ./data/ssh then restart! *****')
-  console.log(' ****************************************************************')
+  handler.fileops.writePubkey();
+  handler.fileops.writePrivkey();
 } else {
   // pull the admins file when the program starts (skip if ssh was just created)
   handler.fileops.pullAdminsFile();

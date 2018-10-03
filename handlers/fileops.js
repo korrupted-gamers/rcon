@@ -8,16 +8,19 @@ const Rsync = require('rsync');
 const sshHost = process.env.SSH_HOST;
 const sshPort = process.env.SSH_PORT;
 const sshUser = process.env.SSH_USER;
-const sshIdentity = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa');
+const sshIdentityFile = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa');
+const sshIdentityPubFile = path.join(__dirname, '..', 'data', 'ssh', 'id_rsa.pub');
 const remoteFilePath = process.env.REMOTE_ADMINS_FILEPATH;
-
+const sshPrivkeyData = process.env.SSH_PRIVATE_KEY;
+const sshPubkeyData = process.env.SSH_PUBLIC_KEY;
 
 
 if (typeof sshUser === 'undefined') throw new Error('SSH_USER must be defined in env')
 if (typeof sshHost === 'undefined') throw new Error('SSH_HOST must be defined in env')
 if (typeof sshPort === 'undefined') throw new Error('SSH_PORT must be defined in env')
 if (typeof remoteFilePath === 'undefined') throw new Error('REMOTE_ADMINS_FILEPATH must be defined in env')
-
+if (typeof sshPrivkey === 'undefined') throw new Error('SSH_PRIVATE_KEY must be defined in env.')
+if (typeof sshPubkey === 'undefined') throw new Error('SSH_PUBLIC_KEY must be defined in env.')
 
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
@@ -79,7 +82,7 @@ module.exports = {
 
   pushAdminsFile: (obj, args) => {
     var rsync = new Rsync()
-      .shell(`ssh -p ${sshPort} -i ${sshIdentity}`)
+      .shell(`ssh -p ${sshPort} -i ${sshIdentityFile}`)
       .source(`${filePath}`)
       .destination(`${sshUser}@${sshHost}:${remoteFilePath}`)
 
@@ -91,7 +94,7 @@ module.exports = {
   pullAdminsFile: (obj, args) => {
     console.log('pulling file')
     var rsync = new Rsync()
-      .shell(`ssh -p ${sshPort} -i ${sshIdentity}`)
+      .shell(`ssh -p ${sshPort} -i ${sshIdentityFile}`)
       .source(`${sshUser}@${sshHost}:${remoteFilePath}`)
       .destination(`${filePath}`)
 
@@ -101,8 +104,16 @@ module.exports = {
     })
   },
 
-  isSSHKeyPresent: () => {
-    return fs.fileExistsSync(sshIdentity)
+  isSSHKeyPresent: (cb) => {
+    return fs.fileExistsSync(sshIdentityFile);
+  },
+
+  writePubkey: () => {
+    fs.writeFileSync(sshIdentityPubFile, sshPubkeyData);
+  },
+
+  writePrivkey: () => {
+    fs.writeFileSync(sshIdentityFile, sshPrivkeyData);
   }
 
 };
