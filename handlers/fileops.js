@@ -19,8 +19,8 @@ if (typeof sshUser === 'undefined') throw new Error('SSH_USER must be defined in
 if (typeof sshHost === 'undefined') throw new Error('SSH_HOST must be defined in env')
 if (typeof sshPort === 'undefined') throw new Error('SSH_PORT must be defined in env')
 if (typeof remoteFilePath === 'undefined') throw new Error('REMOTE_ADMINS_FILEPATH must be defined in env')
-if (typeof sshPrivkey === 'undefined') throw new Error('SSH_PRIVATE_KEY must be defined in env.')
-if (typeof sshPubkey === 'undefined') throw new Error('SSH_PUBLIC_KEY must be defined in env.')
+if (typeof sshPrivkeyData === 'undefined') throw new Error('SSH_PRIVATE_KEY must be defined in env.')
+if (typeof sshPubkeyData === 'undefined') throw new Error('SSH_PUBLIC_KEY must be defined in env.')
 
 
 // echo 'Some Text' | ssh user@remotehost "cat > /remotefile.txt"
