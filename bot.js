@@ -1,8 +1,7 @@
-require('dotenv').config()
 //const nedb = require('nedb'); // @todo ???
 const Rcon = require('rcon');
-const handler = require('./handler');
-
+const handler = require('./handlers');
+const env = require('./env')
 
 
 
@@ -14,9 +13,9 @@ handler.fileops.generateKnownHostsFile();
 handler.fileops.pullAdminsFile();
 
 const rcon = new Rcon(
-  process.env.RCON_HOST,
-  process.env.RCON_PORT,
-  process.env.RCON_PASSWORD, {
+  env.rconHost,
+  env.rconPort,
+  env.rconPassword, {
     "tcp": true,
     "challenge": false
   }

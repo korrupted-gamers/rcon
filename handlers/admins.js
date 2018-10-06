@@ -2,7 +2,7 @@ module.exports = {
 
     addSpawner: (obj, args) => {
         let name = obj.message.name;
-	     let steamID = obj.message.steamID;
+	    let steamID = obj.message.steamID;
 
         obj.rcon.send('AdminBroadcast ' + nickname + ': ' + args);
     },

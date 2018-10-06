@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+
+const Rcon = require('rcon')
+const env = require('./environment')
+const handler = require('./handlers')
+
+require('yargs') // eslint-disable-line
+  .command('restart', 'Restart the match (AdminRestartMatch)',
+  (yargs) => {}, (argv) => {
+
+    var rcon = new Rcon(
+      env.rconHost,
+      env.rconPort,
+      env.rconPassword, {
+        "tcp": true,
+        "challenge": false
+      }
+    )
+
+    rcon.on('auth', () => {
+      if (argv.verbose) console.info('authenticated via RCON')
+      if (argv.verbose) console.info(`restarting match`)
+
+      handler.admins.restart({
+        rcon: rcon
+      });
+      if (argv.verbose) console.log('restart done')
+      rcon.disconnect();
+    })
+
+    rcon.connect();
+
+
+  })
+  .option('verbose', {
+    alias: 'v',
+    default: false
+  })
+  .argv

@@ -19,7 +19,8 @@
     "keypress": "^0.2.1",
     "rcon": "^1.0.3",
     "request": "^2.83.0",
-    "rsyncwrapper": "^3.0.1"
+    "rsyncwrapper": "^3.0.1",
+    "yargs": "^12.0.2"
   },
   "engines": {
     "node": "^8.12.0"
